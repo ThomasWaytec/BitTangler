@@ -6,12 +6,12 @@
 double scaleIntensity(double n) {
 
 
-    double scale = 65.0;
+    double scale = 500.0;
 
-    if (n > 90.0) {scale = 15.0;}
-    else if (n > 70.0) {scale = 25.0;}
-    else if (n > 50.0) {scale = 45.0;}    
-    else if (n > 20.0) {scale = 55.0;}    
+    if (n == 100.0) {scale = 25.0;}
+    else if (n > 90.0) {scale = 95.0;}
+    else if (n > 70.0) {scale = 155.0;}
+    else if (n > 50.0) {scale = 315.0;}    
     
     return n + n * (n / scale);
 }   
@@ -69,7 +69,7 @@ int main() {
 
     size_t fileSize = getFileSize(filename);
 
-    size_t intensity = 0; /* 0 - 100 */
+    size_t intensity = 15; /* 0 - 100 */
 
 
     intensity = (size_t)scaleIntensity((double)intensity);
