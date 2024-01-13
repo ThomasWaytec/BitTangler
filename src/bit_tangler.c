@@ -72,7 +72,7 @@ int main() {
     size_t intensity = 0; /* 0 - 100 */
 
 
-    intensity = (size_t)scaleNumber((double)intensity);
+    intensity = (size_t)scaleIntensity((double)intensity);
 
     double bytesToCorrupt = (double)fileSize * ((double)intensity/100);
 
