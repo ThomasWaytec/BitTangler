@@ -55,6 +55,7 @@ void corruptFile(const char *filename, size_t sequences, size_t maxSeqLen) {
 
         fseek(file, position, SEEK_SET);
 
+        /* write a byte sequence of length seqLength */
         for (size_t i = 0; i < seqLength; i++) {
             char randomByte = rand() % CHAR_MAX;
             fwrite(&randomByte, sizeof(char), 1, file);
