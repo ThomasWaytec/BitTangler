@@ -17,5 +17,6 @@ bit_tangler
 *.vscode/
 tempCodeRunnerFile.c
 
-# Other
+# Testing
 create_test_file.py
+test.txt
