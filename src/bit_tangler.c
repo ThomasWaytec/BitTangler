@@ -54,9 +54,19 @@ void corruptFile(const char *filename, size_t sequences, size_t maxSeqLen) {
 int main() {
     const char *filename = "test.txt";
 
+    size_t fileSize = getFileSize(filename);
 
-    size_t sequences = 1;
-    size_t maxSeqLen = 2;
+    size_t const INTENSITY = 50; /* 0 - 100 */
+
+    double bytesToCorrupt = (double)fileSize * ((double)INTENSITY/100);
+    printf("%f\n", bytesToCorrupt);
+
+    size_t maxSeqLen = (size_t) (bytesToCorrupt * 0.025);
+    printf("%lld\n", maxSeqLen);
+
+    size_t sequences = (size_t) (bytesToCorrupt / (double)maxSeqLen);
+    printf("%lld\n", sequences);
+
 
     corruptFile(filename, sequences, maxSeqLen);
 
