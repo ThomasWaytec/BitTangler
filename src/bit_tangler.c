@@ -77,7 +77,7 @@ int main() {
     double bytesToCorrupt = (double)fileSize * ((double)intensity/100);
 
     size_t maxSeqLen = (size_t) ceil((bytesToCorrupt * 0.003));
-    size_t sequences = (size_t) (bytesToCorrupt / (double)maxSeqLen);
+    size_t sequences = (size_t) (bytesToCorrupt / ((double)maxSeqLen/2));
 
 
     corruptFile(filename, sequences, maxSeqLen);
