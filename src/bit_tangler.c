@@ -2,29 +2,47 @@
 #include <stdlib.h>
 #include <time.h>
 
-void corruptFile(const char *filename, size_t numBytesToCorrupt) {
-    FILE *file = fopen(filename, "r+");
+size_t getFileSize(const char *filename) {
+    FILE *file = fopen(filename, "r");
 
     if (file == NULL) {
-        perror("Error opening file");
+        perror("Error opening file.");
         exit(EXIT_FAILURE);
     }
 
-    // get file size
+
+    /* get file size */
     fseek(file, 0, SEEK_END);
-    long fileSize = ftell(file);
+    size_t fileSize = ftell(file);
     fseek(file, 0, SEEK_END);
 
+
+    fclose(file);
+
+}
+
+void corruptFile(const char *filename, size_t sequences, size_t maxSeqLen) {
+    FILE *file = fopen(filename, "r+");
+    
+
+    /* seed RNG */
     srand((unsigned int)time(NULL));
 
-    for (size_t i = 0; i < numBytesToCorrupt; ++i) {
-        long position = rand() % fileSize;
+
+
+    for (size_t i = 0; i < sequences; i++)
+    {
+        size_t position = rand() % fileSize;
+        size_t seqlength = rand() % maxSeqLen + 1;
+
 
         fseek(file, position, SEEK_SET);
 
-        //char randomByte = rand() % 256;
-        char randomByte = 0x00;
-        fwrite(&randomByte, sizeof(char), 1, file);
+        for (size_t i = 0; i < seqlength; i++) {
+            //char randomByte = rand() % CHAR_MAX;
+            char randomByte = 0x00;
+            fwrite(&randomByte, sizeof(char), 1, file);
+        }
     }
 
     fclose(file);
@@ -32,9 +50,12 @@ void corruptFile(const char *filename, size_t numBytesToCorrupt) {
 
 int main() {
     const char *filename = "test.txt";
-    size_t numBytesToCorrupt = 10;
 
-    corruptFile(filename, numBytesToCorrupt);
+
+    size_t sequences = 1;
+    size_t maxSeqLen = 2;
+
+    corruptFile(filename, sequences, maxSeqLen);
 
     printf("File corrupted successfully.\n");
 
