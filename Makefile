@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = 
+CFLAGS = -Wall -Werror
 LDFLAGS =
 
 SRC_DIR = src
