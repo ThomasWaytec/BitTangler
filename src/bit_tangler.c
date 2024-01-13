@@ -68,12 +68,16 @@ void corruptFile(const char *filename, size_t sequences, size_t maxSeqLen) {
 int main() {
     const char *filename = "test.txt";
 
-    size_t fileSize = getFileSize(filename);
 
-    size_t intensity = 15; /* 0 - 100 */
+    /* parse command-line arguments here */
 
 
+
+    size_t intensity = 15; /* 0 - 100 */    
     intensity = (size_t)scaleIntensity((double)intensity);
+
+
+    size_t fileSize = getFileSize(filename);
 
     double bytesToCorrupt = (double)fileSize * ((double)intensity/100);
 
