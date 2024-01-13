@@ -19,12 +19,15 @@ size_t getFileSize(const char *filename) {
 
     fclose(file);
 
+    return fileSize;
+
 }
 
 void corruptFile(const char *filename, size_t sequences, size_t maxSeqLen) {
+    size_t fileSize = getFileSize(filename);
+
     FILE *file = fopen(filename, "r+");
     
-
     /* seed RNG */
     srand((unsigned int)time(NULL));
 
