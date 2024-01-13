@@ -56,8 +56,7 @@ void corruptFile(const char *filename, size_t sequences, size_t maxSeqLen) {
         fseek(file, position, SEEK_SET);
 
         for (size_t i = 0; i < seqLength; i++) {
-            //char randomByte = rand() % CHAR_MAX;
-            char randomByte = 0x00;
+            char randomByte = rand() % CHAR_MAX;
             fwrite(&randomByte, sizeof(char), 1, file);
         }
     }
@@ -70,25 +69,15 @@ int main() {
 
     size_t fileSize = getFileSize(filename);
 
-    size_t INTENSITY = 0; /* 0 - 100 */
+    size_t intensity = 0; /* 0 - 100 */
 
 
-    INTENSITY = (size_t)scaleNumber((double)INTENSITY);
-    printf("INTENSITY=%lld\n", INTENSITY);
-    //exit(0);
+    intensity = (size_t)scaleNumber((double)intensity);
 
-
-    //INTENSITY = (size_t) ((double)INTENSITY * (double)INTENSITY/20);
-
-
-    double bytesToCorrupt = (double)fileSize * ((double)INTENSITY/100);
-    printf("bytesToCorrupt=%f\n", bytesToCorrupt);
+    double bytesToCorrupt = (double)fileSize * ((double)intensity/100);
 
     size_t maxSeqLen = (size_t) ceil((bytesToCorrupt * 0.003));
-    printf("maxSeqLen=%lld\n", maxSeqLen);
-
     size_t sequences = (size_t) (bytesToCorrupt / (double)maxSeqLen);
-    printf("sequences=%lld\n", sequences);
 
 
     corruptFile(filename, sequences, maxSeqLen);
