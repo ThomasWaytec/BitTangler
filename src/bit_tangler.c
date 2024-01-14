@@ -9,19 +9,8 @@
 #include "error.h"
 #include "help.h"
 #include "file.h"
+#include "string_utils.h"
 
-bool isStringNumeric(char* string) {
-    for (size_t i = 0; i < strlen(string); i++)
-    {
-        if (!isdigit(string[i]))
-        {
-            return false;
-        }
-        
-    }
-    return true;
-    
-}
 
 double scaleIntensity(double n) {
 
