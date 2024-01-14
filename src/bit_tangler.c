@@ -4,10 +4,24 @@
 #include <math.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "error.h"
 #include "help.h"
 #include "file.h"
+
+bool isStringNumeric(char* string) {
+    for (size_t i = 0; i < strlen(string); i++)
+    {
+        if (!isdigit(string[i]))
+        {
+            return false;
+        }
+        
+    }
+    return true;
+    
+}
 
 double scaleIntensity(double n) {
 
@@ -56,7 +70,7 @@ int main(int argc, char* argv[]) {
     char* FILEPATH = NULL;
 
     bool intensity_input;
-    size_t intensity;
+    size_t unscaled_intensity = 10; /* default intensity value */
 
     char* arg;
     size_t arg_len;
@@ -72,11 +86,11 @@ int main(int argc, char* argv[]) {
 
         if (intensity_input)
         {
-            intensity = atoi(arg);
+            unscaled_intensity = atoi(arg);
 
-            if (intensity < 0 || intensity > 100)
+            if (unscaled_intensity < 0 || unscaled_intensity > 100)
             {
-                fatal_error("Intensity (%lld) has to be between 0 and 100 (including).", intensity);
+                fatal_error("Intensity (%lld) has to be between 0 and 100 (including).", unscaled_intensity);
             }
             
             intensity_input = false;
@@ -122,8 +136,7 @@ int main(int argc, char* argv[]) {
 
 
 
-
-    intensity = (size_t)scaleIntensity((double)intensity);
+    size_t intensity = (size_t)scaleIntensity((double)unscaled_intensity);
 
 
     size_t FILESIZE = getFileSize(FILEPATH);
@@ -136,7 +149,7 @@ int main(int argc, char* argv[]) {
 
     corruptFile(FILEPATH, sequences, maxSeqLen);
 
-    printf("File corrupted successfully with intensity level of %lld.\n", intensity);
+    printf("File corrupted successfully with intensity level of %lld.\n", unscaled_intensity);
 
     return 0;
 }
