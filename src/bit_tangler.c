@@ -46,29 +46,23 @@ void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
     srand((unsigned int)time(NULL));
 
 
-    printf("before writing.");
     for (size_t i = 0; i < sequences; i++)
     {
 
-        printf("start of for loop.");
         size_t position = rand() % FILESIZE;
         size_t seqLen = rand() % maxSeqLen + 1;
 
 
         fseek(file, position, SEEK_SET);
 
-        printf("middle of for loop.");
         /* write a byte sequence of length seqLen */
         for (size_t i = 0; i < seqLen; i++) {
             char randomByte = rand() % CHAR_MAX;
             fwrite(&randomByte, sizeof(char), 1, file);
         }
-        printf("end of for loop.");
     }
 
-    printf("after writing.");
     fclose(file);
-    printf("end of return.");
 
 }
 
@@ -159,7 +153,6 @@ int main(int argc, char* argv[]) {
     size_t maxSeqLen = (size_t) ceil((bytesToCorrupt * 0.003));
     size_t sequences = (size_t) (bytesToCorrupt / ((double)maxSeqLen/2));
 
-    printf("debug.");
     corruptFile(FILEPATH, sequences, maxSeqLen);
 
     printf("File corrupted successfully with intensity level of %lld.\n", unscaled_intensity);
