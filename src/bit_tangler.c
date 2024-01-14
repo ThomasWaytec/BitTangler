@@ -12,6 +12,7 @@
 #include "file.h"
 #include "string_utils.h"
 
+#define DEFAULT_INTENSITY 10
 
 double scaleIntensity(double n) {
 
@@ -61,7 +62,7 @@ int main(int argc, char* argv[]) {
     char* FILEPATH = NULL;
 
     bool intensity_input;
-    size_t unscaled_intensity = 10; /* default intensity value */
+    size_t unscaled_intensity = DEFAULT_INTENSITY;
 
     char* arg;
     size_t arg_len;
