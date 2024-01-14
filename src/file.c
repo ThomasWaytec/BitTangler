@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "error.h"
+
 const size_t getFileSize(const char *FILEPATH) {
     FILE *file = fopen(FILEPATH, "r");
 
     if (file == NULL) {
-        perror("Error opening file.");
-        exit(EXIT_FAILURE);
+        fatal_error("File not found or doesn't exist: \"%s\"", FILEPATH);
     }
 
 
