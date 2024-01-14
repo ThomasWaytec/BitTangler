@@ -86,6 +86,12 @@ int main(int argc, char* argv[]) {
 
         if (intensity_input)
         {
+
+            if (!isStringNumeric(arg))
+            {
+                fatal_error("Intensity level (%s) may only contain numbers.", arg);
+            }
+            
             unscaled_intensity = atoi(arg);
 
             if (unscaled_intensity < 0 || unscaled_intensity > 100)
