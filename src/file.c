@@ -7,8 +7,8 @@
 #ifdef _WIN32
     #include <io.h>
 
-    bool fileExists(const char* filePath) {
-        return _access(filePath, 0) != -1;
+    bool fileExists(const char* FILEPATH) {
+        return _access(FILEPATH, 0) != -1;
     }
 
 #endif
