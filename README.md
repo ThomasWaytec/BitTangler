@@ -17,11 +17,10 @@ make
 
 ## Usage
 Type in ```./tangler``` followed by the name of the file you'd like to corrupt.
-Add optional Intensity level after.
+Add optional intensity level after.
 
 ### Intensity Level:
-You can use `--intensity` or `-i`followed by the intensity level to tell how much you want the file to be corrupted.
-Where the intensity level is: intensity > 0 and intensity < 101
+Use --intensity or -i followed by a level (1 to 100) to specify the degree of file corruption. The intensity level should be in the range of 1 to 100 (including).
 
 ### Examples:
 ``` shell
