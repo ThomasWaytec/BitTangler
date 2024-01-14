@@ -16,8 +16,8 @@ double scaleIntensity(double n) {
     return n + n * (n / scale);
 }   
 
-size_t getFileSize(const char *filename) {
-    FILE *file = fopen(filename, "r");
+size_t getFileSize(const char *FILEPATH) {
+    FILE *file = fopen(FILEPATH, "r");
 
     if (file == NULL) {
         perror("Error opening file.");
@@ -37,10 +37,10 @@ size_t getFileSize(const char *filename) {
 
 }
 
-void corruptFile(const char *filename, size_t sequences, size_t maxSeqLen) {
-    size_t fileSize = getFileSize(filename);
+void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
+    size_t fileSize = getFileSize(FILEPATH);
 
-    FILE *file = fopen(filename, "r+");
+    FILE *file = fopen(FILEPATH, "r+");
     
     /* seed RNG */
     srand((unsigned int)time(NULL));
@@ -65,11 +65,63 @@ void corruptFile(const char *filename, size_t sequences, size_t maxSeqLen) {
     fclose(file);
 }
 
-int main() {
-    const char *filename = "test.txt";
+int main(int argc, char* argv[]) {
+
+     char* FILEPATH = NULL;
+    /* parse coommand-line arguments */
+    for (size_t i = 1; i < argc; i++) {   
+        arg = argv[i];
+        arg_len = strlen(arg);
+        
+        /* help message arguments */
+        if (strcmp(arg, "-h") == 0 || strcmp(arg, "--help") == 0)
+        {print_help_message(); exit(EXIT_SUCCESS);}
 
 
-    /* parse command-line arguments here */
+
+        /* standalone data format arguments with input (i.e. -i 15) */        
+        if (arg[0] == '-' && arg_len == 2)
+        {   
+
+            /* if not found among the data formats */
+            if (!DATA_FORMATS_MAP[arg[1]].exist) {unknown_arg_error(arg);}
+            
+            chosen_data_formats_len += 1;
+            chosen_data_formats = realloc(chosen_data_formats, chosen_data_formats_len*sizeof(data_format_t));
+
+            chosen_data_formats[chosen_data_formats_len - 1] = DATA_FORMATS_MAP[arg[1]];    
+                
+        }
+
+        /* double dash arguments with input (i.e. --intensity 15) */
+        if (arg[0] == '-' && arg[1] == '-'  && arg_len >= 2) {
+            
+            if (strcmp(arg, "--buffer") == 0)
+            {
+                buffering = true;
+            }
+
+            else {unknown_arg_error(arg);}
+        }
+
+
+        /* non-switch (filepath) argument */
+        else if (arg[0] != '-') {
+            /* more than one filepath arguments given */
+            if (FILEPATH != NULL) {fatal_error("Too many non-switch (filepath) arguments: \"%s\" ...", arg);}
+
+            FILEPATH = arg;
+        }
+
+        /* any other argument */
+        else {unknown_arg_error(arg);}
+    }
+
+    if (FILEPATH == NULL) {
+        print_usage();
+        fatal_error("No file argument given.");
+    }
+
 
 
 
@@ -77,7 +129,7 @@ int main() {
     intensity = (size_t)scaleIntensity((double)intensity);
 
 
-    size_t fileSize = getFileSize(filename);
+    size_t fileSize = getFileSize(FILEPATH);
 
     double bytesToCorrupt = (double)fileSize * ((double)intensity/100);
 
@@ -85,7 +137,7 @@ int main() {
     size_t sequences = (size_t) (bytesToCorrupt / ((double)maxSeqLen/2));
 
 
-    corruptFile(filename, sequences, maxSeqLen);
+    corruptFile(FILEPATH, sequences, maxSeqLen);
 
     printf("File corrupted successfully.\n");
 
