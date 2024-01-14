@@ -148,6 +148,11 @@ int main(int argc, char* argv[]) {
 
     size_t FILESIZE = getFileSize(FILEPATH);
 
+    if (!fileExists(FILEPATH))
+    {fatal_error("File not found or doesn't exist: \"%s\"", FILEPATH);}
+    
+
+
     double bytesToCorrupt = (double)FILESIZE * ((double)intensity/100);
 
     size_t maxSeqLen = (size_t) ceil((bytesToCorrupt * 0.003));
