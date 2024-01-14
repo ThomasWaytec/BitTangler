@@ -27,4 +27,4 @@ Use `--intensity` or `-i` followed by a level (1 to 100) to specify the degree o
 ./tangler image.jpg
 ./tangler usernames.txt -i 50
 ./tangler program.exe --intensity 3 
-./tangler.exe videos/movie.mp4 -i 100
+./tangler videos/movie.mp4 -i 100
