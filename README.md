@@ -16,7 +16,8 @@ make
 ```
 
 ## Usage
-Type in ```./tangler``` followed by the name of the file you'd like to corrupt. 
+Type in ```./tangler``` followed by the name of the file you'd like to corrupt.
+Add optional Intensity level after.
 
 ### Intensity Level:
 You can use `--intensity` or `-i`followed by the intensity level to tell how much you want the file to be corrupted.
