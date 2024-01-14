@@ -7,7 +7,7 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJ_DIR = obj
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-TARGET = bit_tangler
+TARGET = tangler
 
 ifeq ($(OS),Windows_NT)
 	CLEAN_CMD = powershell -noprofile rm -force
