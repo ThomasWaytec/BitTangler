@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
 
             if (unscaled_intensity < 1 || unscaled_intensity > 100)
             {
-                fatal_error("Intensity level \"%lld\" has to be between 1 and 100 (including).", unscaled_intensity);
+                fatal_error("Intensity level \"%zu\" has to be between 1 and 100 (including).", unscaled_intensity);
             }
             
             intensity_input = false;
@@ -150,7 +150,7 @@ int main(int argc, char* argv[]) {
 
     corruptFile(FILEPATH, sequences, maxSeqLen);
 
-    printf("File corrupted successfully with intensity level of %lld.\n", unscaled_intensity);
+    printf("File corrupted successfully with intensity level of %zu.\n", unscaled_intensity);
 
     return 0;
 }
