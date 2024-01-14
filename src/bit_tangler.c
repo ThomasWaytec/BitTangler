@@ -123,7 +123,6 @@ int main(int argc, char* argv[]) {
 
 
 
-    size_t intensity = 15; /* 0 - 100 */    
     intensity = (size_t)scaleIntensity((double)intensity);
 
 
@@ -137,7 +136,7 @@ int main(int argc, char* argv[]) {
 
     corruptFile(FILEPATH, sequences, maxSeqLen);
 
-    printf("File corrupted successfully.\n");
+    printf("File corrupted successfully with intensity level of %lld.\n", intensity);
 
     return 0;
 }
