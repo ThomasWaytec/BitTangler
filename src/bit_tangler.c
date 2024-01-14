@@ -3,6 +3,9 @@
 #include <time.h>
 #include <math.h>
 #include <stdbool.h>
+#include <string.h>
+
+#include <file.h>
 
 double scaleIntensity(double n) {
 
