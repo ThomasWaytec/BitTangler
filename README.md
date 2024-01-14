@@ -19,7 +19,7 @@ make
 Type in `./tangler` followed by the name of the file you'd like to corrupt.
 Add optional intensity level after.
 
-### Intensity Level:
+### Intensity Level
 Use `--intensity` or `-i` followed by a level (1 to 100) to specify the degree of file corruption. The intensity level should be in the range of 1 to 100 (including).
 
 ### Examples:
