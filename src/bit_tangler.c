@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <stdbool.h>
 
 double scaleIntensity(double n) {
 
@@ -67,7 +68,13 @@ void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
 
 int main(int argc, char* argv[]) {
 
-     char* FILEPATH = NULL;
+    char* FILEPATH = NULL;
+
+    bool intensity_input;
+    size_t intensity;
+
+    char* arg;
+    size_t arg_len;
     /* parse coommand-line arguments */
     for (size_t i = 1; i < argc; i++) {   
         arg = argv[i];
@@ -78,28 +85,34 @@ int main(int argc, char* argv[]) {
         {print_help_message(); exit(EXIT_SUCCESS);}
 
 
+        if (intensity_input)
+        {
+            intensity = atoi(optarg);
 
-        /* standalone data format arguments with input (i.e. -i 15) */        
-        if (arg[0] == '-' && arg_len == 2)
+            if (intensity < 0 || intensity > 100)
+            {
+                fatal_error("intesityt range error")
+            }
+            
+            intensity_input = false;
+            
+        }
+        
+        /* single letter intensity argument (i.e. -i 15) */
+        else if (arg[0] == '-' && arg_len == 2)
         {   
 
-            /* if not found among the data formats */
-            if (!DATA_FORMATS_MAP[arg[1]].exist) {unknown_arg_error(arg);}
+            if (arg[1] == 'i') 
+            {intensity_input = true;}
+            else {unknown_arg_error(arg)}
             
-            chosen_data_formats_len += 1;
-            chosen_data_formats = realloc(chosen_data_formats, chosen_data_formats_len*sizeof(data_format_t));
-
-            chosen_data_formats[chosen_data_formats_len - 1] = DATA_FORMATS_MAP[arg[1]];    
-                
         }
 
-        /* double dash arguments with input (i.e. --intensity 15) */
-        if (arg[0] == '-' && arg[1] == '-'  && arg_len >= 2) {
+        /* double dash intensity argument with input (i.e. --intensity 15) */
+        else if (arg[0] == '-' && arg[1] == '-'  && arg_len >= 2) {
             
-            if (strcmp(arg, "--buffer") == 0)
-            {
-                buffering = true;
-            }
+            if (strcmp(arg, "--intensity") == 0)
+            {intensity_input = true;}
 
             else {unknown_arg_error(arg);}
         }
