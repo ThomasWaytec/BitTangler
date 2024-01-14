@@ -5,8 +5,9 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "file.h"
 #include "error.h"
+#include "help.h"
+#include "file.h"
 
 double scaleIntensity(double n) {
 
