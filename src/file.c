@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-size_t getFileSize(const char *FILEPATH) {
+const size_t getFileSize(const char *FILEPATH) {
     FILE *file = fopen(FILEPATH, "r");
 
     if (file == NULL) {

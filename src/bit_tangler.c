@@ -19,7 +19,7 @@ double scaleIntensity(double n) {
 
 
 void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
-    size_t fileSize = getFileSize(FILEPATH);
+    const size_t FILESIZE = getFileSize(FILEPATH);
 
     FILE *file = fopen(FILEPATH, "r+");
     
@@ -30,7 +30,7 @@ void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
 
     for (size_t i = 0; i < sequences; i++)
     {
-        size_t position = rand() % fileSize;
+        size_t position = rand() % FILESIZE;
         size_t seqLen = rand() % maxSeqLen + 1;
 
 
@@ -122,9 +122,9 @@ int main(int argc, char* argv[]) {
     intensity = (size_t)scaleIntensity((double)intensity);
 
 
-    size_t fileSize = getFileSize(FILEPATH);
+    size_t FILESIZE = getFileSize(FILEPATH);
 
-    double bytesToCorrupt = (double)fileSize * ((double)intensity/100);
+    double bytesToCorrupt = (double)FILESIZE * ((double)intensity/100);
 
     size_t maxSeqLen = (size_t) ceil((bytesToCorrupt * 0.003));
     size_t sequences = (size_t) (bytesToCorrupt / ((double)maxSeqLen/2));
