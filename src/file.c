@@ -1,15 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "error.h"
 
-const size_t getFileSize(const char *FILEPATH) {
-    FILE *file = fopen(FILEPATH, "r");
+#ifdef _WIN32
+    #include <io.h>
 
-    if (file == NULL) {
-        fatal_error("File not found or doesn't exist: \"%s\"", FILEPATH);
+    bool fileExists(const char* filePath) {
+        return _access(filePath, 0) != -1;
     }
 
+#endif
+
+#ifdef linux
+    #include <unistd.h>
+
+    bool fileExists(const char* FILEPATH) {
+        return access(FILEPATH, F_OK) != -1;
+    }
+#endif
+
+const size_t getFileSize(const char* FILEPATH) {
+    FILE* file = fopen(FILEPATH, "r");
 
     /* get file size */
     fseek(file, 0, SEEK_END);
