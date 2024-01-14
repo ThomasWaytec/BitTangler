@@ -89,14 +89,14 @@ int main(int argc, char* argv[]) {
 
             if (!isStringNumeric(arg))
             {
-                fatal_error("Intensity level (%s) may only contain numbers.", arg);
+                fatal_error("Intensity level \"%s\" may only contain numbers.", arg);
             }
             
             unscaled_intensity = atoi(arg);
 
             if (unscaled_intensity < 0 || unscaled_intensity > 100)
             {
-                fatal_error("Intensity (%lld) has to be between 0 and 100 (including).", unscaled_intensity);
+                fatal_error("Intensity level \"%lld\" has to be between 0 and 100 (including).", unscaled_intensity);
             }
             
             intensity_input = false;
