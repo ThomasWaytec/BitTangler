@@ -87,11 +87,11 @@ int main(int argc, char* argv[]) {
 
         if (intensity_input)
         {
-            intensity = atoi(optarg);
+            intensity = atoi(arg);
 
             if (intensity < 0 || intensity > 100)
             {
-                fatal_error("intesityt range error")
+                fatal_error("Intensity (%lld) has to be between 0 and 100 (including).", intensity);
             }
             
             intensity_input = false;
@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
 
             if (arg[1] == 'i') 
             {intensity_input = true;}
-            else {unknown_arg_error(arg)}
+            else {unknown_arg_error(arg);}
             
         }
 
