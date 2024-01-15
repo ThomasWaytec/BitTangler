@@ -1,6 +1,6 @@
 # Bit-Tangler
 
-Bit-Tangler facilitates controlled file corruption through byte overwrites. Users can specify the percentage of data to be affected, introducing a touch of randomness for realistic scenarios. Tailor the intensity for controlled testing, providing a user-friendly tool to explore and fortify data integrity with precision.
+Bit-Tangler allows controlled file corruption through byte overwrites. Users can specify the percentage of data to be affected, introducing a touch of randomness for realistic scenarios. Tailor the intensity for controlled testing, providing a user-friendly tool to explore and fortify data integrity with precision.
 
 ## Download and Compilation
 ### Prerequisites:
