@@ -15,6 +15,8 @@
 #define DEFAULT_INTENSITY 10
 
 double scaleIntensity(double n) {
+    /* amplify larger numbers while minimally
+    affecting smaller ones */
 
 
     double scale = 500.0;
@@ -136,16 +138,17 @@ int main(int argc, char* argv[]) {
     if (!fileExists(FILEPATH))
     {fatal_error("File not found or doesn't exist: \"%s\"", FILEPATH);}
     
+    
+    
     size_t FILESIZE = getFileSize(FILEPATH);
-    
-
-    
     size_t intensity = (size_t)scaleIntensity((double)unscaled_intensity);
 
     double bytesToCorrupt = (double)FILESIZE * ((double)intensity/100);
 
+
     size_t maxSeqLen = (size_t) ceil((bytesToCorrupt * 0.003));
     size_t sequences = (size_t) (bytesToCorrupt / ((double)maxSeqLen/2));
+
 
     corruptFile(FILEPATH, sequences, maxSeqLen);
 
