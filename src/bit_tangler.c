@@ -152,7 +152,8 @@ int main(int argc, char* argv[]) {
 
     corruptFile(FILEPATH, sequences, maxSeqLen);
 
-    printf("File corrupted successfully with intensity level of %zu.\n", unscaled_intensity);
+    printf("%s corrupted successfully with intensity level of %zu.\n",
+    FILEPATH, unscaled_intensity);
 
     return 0;
 }
