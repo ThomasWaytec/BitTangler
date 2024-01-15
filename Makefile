@@ -10,7 +10,7 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 TARGET = tangler
 
 ifeq ($(OS),Windows_NT)
-	CLEAN_CMD = powershell -noprofile rm -force
+	CLEAN_CMD = powershell -noprofile rm -force -ErrorAction SilentlyContinue
 else
 	CLEAN_CMD = rm -f
 endif
