@@ -11,7 +11,7 @@
 *.i*86
 *.x86_64
 *.hex
-bit_tangler
+tangler
 
 # IDE
 *.vscode/
