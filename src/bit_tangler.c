@@ -133,16 +133,14 @@ int main(int argc, char* argv[]) {
     }
 
 
-
-    size_t intensity = (size_t)scaleIntensity((double)unscaled_intensity);
-
-
-    size_t FILESIZE = getFileSize(FILEPATH);
-
     if (!fileExists(FILEPATH))
     {fatal_error("File not found or doesn't exist: \"%s\"", FILEPATH);}
     
+    size_t FILESIZE = getFileSize(FILEPATH);
+    
 
+    
+    size_t intensity = (size_t)scaleIntensity((double)unscaled_intensity);
 
     double bytesToCorrupt = (double)FILESIZE * ((double)intensity/100);
 
