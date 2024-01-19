@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Werror
+# CFLAGS_ARG should be passed via the command-line
 LDFLAGS = -lm
 
 SRC_DIR = src
