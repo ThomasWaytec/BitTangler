@@ -60,19 +60,19 @@ void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
 }
 
 void parseArgs(int argc, char* argv[],
-               char** pFILEPATH, size_t* pUnscaledIntensity) {
+               char** pFilepath, size_t* pUnscaledIntensity) {
     /* parse command-line arguments */
-    printf("hello!");
-        
-    char* FILEPATH = *pFILEPATH;
-    size_t unscaledIntensity = *pUnscaledIntensity;
 
+    char* filepath = NULL;
+    size_t unscaledIntensity = *pUnscaledIntensity;
+    
     bool intensity_input;
 
     char* arg;
     size_t arg_len;
     /* parse coommand-line arguments */
     for (size_t i = 1; i < argc; i++) {   
+        
         arg = argv[i];
         arg_len = strlen(arg);
         
@@ -123,48 +123,47 @@ void parseArgs(int argc, char* argv[],
         /* non-switch (filepath) argument */
         else if (arg[0] != '-') {
             /* more than one filepath arguments given */
-            if (FILEPATH != NULL) {fatal_error("Too many non-switch (filepath) arguments: \"%s\" ...", arg);}
+            if (filepath != NULL) {fatal_error("Too many non-switch (filepath) arguments: \"%s\" ...", arg);}
 
-            FILEPATH = arg;
+            filepath = arg;
         }
 
         /* any other argument */
         else {unknown_arg_error(arg);}
     }
 
+    if (filepath == NULL) {
+        print_usage();
+        fatal_error("No file argument given.");
+    }
+
     /* return values via pointers */
-    *pFILEPATH = FILEPATH;
     *pUnscaledIntensity = unscaledIntensity;
+    *pFilepath = strdup(filepath);
 
-
+    
 }
 
 int main(int argc, char* argv[]) {
 
 
-    char** pFILEPATH = NULL;
-    size_t* pUnscaledIntensity = (size_t*) DEFAULT_INTENSITY;
+    char* filepath = NULL;
+    size_t unscaledIntensity = DEFAULT_INTENSITY;
 
     parseArgs(argc, argv,
-              pFILEPATH, pUnscaledIntensity);
+              &filepath, &unscaledIntensity);
 
-    char* FILEPATH = *pFILEPATH;
-    size_t unscaledIntensity = *pUnscaledIntensity;
-
-    printf("FILEPATH=%s\nUnsclaedI=%zu\n", FILEPATH, unscaledIntensity);
-
-    if (FILEPATH == NULL) {
-        print_usage();
-        fatal_error("No file argument given.");
-    }
+ 
 
 
-    if (!fileExists(FILEPATH))
-    {fatal_error("File not found or doesn't exist: \"%s\"", FILEPATH);}
+
+
+    if (!fileExists(filepath))
+    {fatal_error("File not found or doesn't exist: \"%s\"", filepath);}
     
     
     
-    size_t FILESIZE = getFileSize(FILEPATH);
+    size_t FILESIZE = getFileSize(filepath);
     size_t intensity = (size_t)scaleIntensity((double)unscaledIntensity);
 
     double bytesToCorrupt = (double)FILESIZE * ((double)intensity/100);
@@ -174,10 +173,10 @@ int main(int argc, char* argv[]) {
     size_t sequences = (size_t) (bytesToCorrupt / ((double)maxSeqLen/2));
 
 
-    corruptFile(FILEPATH, sequences, maxSeqLen);
+    corruptFile(filepath, sequences, maxSeqLen);
 
     printf("%s corrupted successfully with intensity level of %zu.\n",
-    FILEPATH, unscaledIntensity);
+    filepath, unscaledIntensity);
 
     return 0;
 }
