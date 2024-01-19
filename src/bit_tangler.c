@@ -66,7 +66,7 @@ void parseArgs(int argc, char* argv[],
     char* filepath = NULL;
     size_t unscaledIntensity = *pUnscaledIntensity;
     
-    bool intensity_input;
+    bool intensityInput;
 
     char* arg;
     size_t arg_len;
@@ -81,7 +81,7 @@ void parseArgs(int argc, char* argv[],
         {print_help_message(); exit(EXIT_SUCCESS);}
 
 
-        if (intensity_input)
+        if (intensityInput)
         {
 
             if (!isStringNumeric(arg))
@@ -96,7 +96,7 @@ void parseArgs(int argc, char* argv[],
                 fatal_error("Intensity level \"%zu\" has to be between 1 and 100 (including).", unscaledIntensity);
             }
             
-            intensity_input = false;
+            intensityInput = false;
             
         }
         
@@ -105,7 +105,7 @@ void parseArgs(int argc, char* argv[],
         {   
 
             if (arg[1] == 'i') 
-            {intensity_input = true;}
+            {intensityInput = true;}
             else {unknown_arg_error(arg);}
             
         }
@@ -114,7 +114,7 @@ void parseArgs(int argc, char* argv[],
         else if (arg[0] == '-' && arg[1] == '-'  && arg_len >= 2) {
             
             if (strcmp(arg, "--intensity") == 0)
-            {intensity_input = true;}
+            {intensityInput = true;}
 
             else {unknown_arg_error(arg);}
         }
