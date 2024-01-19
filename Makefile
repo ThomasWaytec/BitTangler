@@ -18,10 +18,10 @@ endif
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	$(CC) $(CFLAGS) $(CFLAGS_ARG) -o $@ $^ $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $< $(LDFLAGS)
+	$(CC) $(CFLAGS) $(CFLAGS_ARG) -c -o $@ $< $(LDFLAGS)
 
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
