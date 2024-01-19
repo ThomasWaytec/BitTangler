@@ -59,12 +59,15 @@ void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
 
 }
 
-int main(int argc, char* argv[]) {
-
-    char* FILEPATH = NULL;
+void parseArgs(int argc, char* argv[],
+               char** pFILEPATH, size_t* pUnscaledIntensity) {
+    /* parse command-line arguments */
+    printf("hello!");
+        
+    char* FILEPATH = *pFILEPATH;
+    size_t unscaledIntensity = *pUnscaledIntensity;
 
     bool intensity_input;
-    size_t unscaled_intensity = DEFAULT_INTENSITY;
 
     char* arg;
     size_t arg_len;
@@ -86,11 +89,11 @@ int main(int argc, char* argv[]) {
                 fatal_error("Intensity level \"%s\" may only contain numbers.", arg);
             }
             
-            unscaled_intensity = atoi(arg);
+            unscaledIntensity = atoi(arg);
 
-            if (unscaled_intensity < 1 || unscaled_intensity > 100)
+            if (unscaledIntensity < 1 || unscaledIntensity > 100)
             {
-                fatal_error("Intensity level \"%zu\" has to be between 1 and 100 (including).", unscaled_intensity);
+                fatal_error("Intensity level \"%zu\" has to be between 1 and 100 (including).", unscaledIntensity);
             }
             
             intensity_input = false;
@@ -129,6 +132,27 @@ int main(int argc, char* argv[]) {
         else {unknown_arg_error(arg);}
     }
 
+    /* return values via pointers */
+    *pFILEPATH = FILEPATH;
+    *pUnscaledIntensity = unscaledIntensity;
+
+
+}
+
+int main(int argc, char* argv[]) {
+
+
+    char** pFILEPATH = NULL;
+    size_t* pUnscaledIntensity = (size_t*) DEFAULT_INTENSITY;
+
+    parseArgs(argc, argv,
+              pFILEPATH, pUnscaledIntensity);
+
+    char* FILEPATH = *pFILEPATH;
+    size_t unscaledIntensity = *pUnscaledIntensity;
+
+    printf("FILEPATH=%s\nUnsclaedI=%zu\n", FILEPATH, unscaledIntensity);
+
     if (FILEPATH == NULL) {
         print_usage();
         fatal_error("No file argument given.");
@@ -141,7 +165,7 @@ int main(int argc, char* argv[]) {
     
     
     size_t FILESIZE = getFileSize(FILEPATH);
-    size_t intensity = (size_t)scaleIntensity((double)unscaled_intensity);
+    size_t intensity = (size_t)scaleIntensity((double)unscaledIntensity);
 
     double bytesToCorrupt = (double)FILESIZE * ((double)intensity/100);
 
@@ -153,7 +177,7 @@ int main(int argc, char* argv[]) {
     corruptFile(FILEPATH, sequences, maxSeqLen);
 
     printf("%s corrupted successfully with intensity level of %zu.\n",
-    FILEPATH, unscaled_intensity);
+    FILEPATH, unscaledIntensity);
 
     return 0;
 }
