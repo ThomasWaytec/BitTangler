@@ -163,7 +163,7 @@ int main(int argc, char* argv[]) {
     
     
     
-    size_t FILESIZE = getFileSize(filepath);
+    const size_t FILESIZE = getFileSize(filepath);
     size_t intensity = (size_t)scaleIntensity((double)unscaledIntensity);
 
     double bytesToCorrupt = (double)FILESIZE * ((double)intensity/100);
