@@ -69,12 +69,12 @@ void parseArgs(int argc, char* argv[],
     bool intensityInput;
 
     char* arg;
-    size_t arg_len;
+    size_t argLen;
     /* parse coommand-line arguments */
     for (size_t i = 1; i < argc; i++) {   
         
         arg = argv[i];
-        arg_len = strlen(arg);
+        argLen = strlen(arg);
         
         /* help message arguments */
         if (strcmp(arg, "-h") == 0 || strcmp(arg, "--help") == 0)
@@ -101,7 +101,7 @@ void parseArgs(int argc, char* argv[],
         }
         
         /* single letter intensity argument (i.e. -i 15) */
-        else if (arg[0] == '-' && arg_len == 2)
+        else if (arg[0] == '-' && argLen == 2)
         {   
 
             if (arg[1] == 'i') 
@@ -111,7 +111,7 @@ void parseArgs(int argc, char* argv[],
         }
 
         /* double dash intensity argument with input (i.e. --intensity 15) */
-        else if (arg[0] == '-' && arg[1] == '-'  && arg_len >= 2) {
+        else if (arg[0] == '-' && arg[1] == '-'  && argLen >= 2) {
             
             if (strcmp(arg, "--intensity") == 0)
             {intensityInput = true;}
