@@ -106,7 +106,7 @@ void parseArgs(int argc, char* argv[],
 
             if (arg[1] == 'i') 
             {intensityInput = true;}
-            else {unknown_arg_error(arg);}
+            else {unknownArgError(arg);}
             
         }
 
@@ -116,7 +116,7 @@ void parseArgs(int argc, char* argv[],
             if (strcmp(arg, "--intensity") == 0)
             {intensityInput = true;}
 
-            else {unknown_arg_error(arg);}
+            else {unknownArgError(arg);}
         }
 
 
@@ -129,7 +129,7 @@ void parseArgs(int argc, char* argv[],
         }
 
         /* any other argument */
-        else {unknown_arg_error(arg);}
+        else {unknownArgError(arg);}
     }
 
     if (filepath == NULL) {
