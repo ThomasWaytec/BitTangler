@@ -27,7 +27,7 @@ const char *HELP_MESSAGE = "tangler: Corrupt files by overwriting bytes with con
     "   tangler media/image.jpg --intensity 75\n";
 
 
-void print_help_message(void) {
+void printHelpMessage(void) {
     printf("%s\n", HELP_MESSAGE);
 }
 
