@@ -2,7 +2,7 @@
 #define HELP_H
 
 
-void print_help_message(void);
+void printHelpMessage(void);
 void print_usage(void);
 
 
