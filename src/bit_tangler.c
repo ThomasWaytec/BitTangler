@@ -133,7 +133,7 @@ void parseArgs(int argc, char* argv[],
     }
 
     if (filepath == NULL) {
-        print_usage();
+        printUsage();
         fatalError("No file argument given.");
     }
 
