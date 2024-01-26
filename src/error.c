@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-void fatal_error(const char *format, ...)
+void fatalError(const char *format, ...)
 {
     va_list args;
     va_start(args, format);
@@ -19,5 +19,5 @@ void fatal_error(const char *format, ...)
 }
 
 void unknown_arg_error(char* arg) {
-    fatal_error("Unknown argument: \"%s\"", arg);
+    fatalError("Unknown argument: \"%s\"", arg);
 }
