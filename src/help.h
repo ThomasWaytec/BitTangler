@@ -3,7 +3,7 @@
 
 
 void printHelpMessage(void);
-void print_usage(void);
+void printUsage(void);
 
 
 #endif
