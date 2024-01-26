@@ -2,6 +2,6 @@
 #define ERROR_H
 
 void fatalError(const char *format, ...);
-void unknown_arg_error(char* arg);
+void unknownArgError(char* arg);
 
 #endif
