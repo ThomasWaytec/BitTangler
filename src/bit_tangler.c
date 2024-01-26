@@ -78,7 +78,7 @@ void parseArgs(int argc, char* argv[],
         
         /* help message arguments */
         if (strcmp(arg, "-h") == 0 || strcmp(arg, "--help") == 0)
-        {print_help_message(); exit(EXIT_SUCCESS);}
+        {printHelpMessage(); exit(EXIT_SUCCESS);}
 
 
         if (intensityInput)
