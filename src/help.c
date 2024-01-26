@@ -31,7 +31,7 @@ void printHelpMessage(void) {
     printf("%s\n", HELP_MESSAGE);
 }
 
-void print_usage(void) {
+void printUsage(void) {
     const char* USAGE = "\n\nUsage: tangler FILE [OPTIONS]\nUse -h for help.";
     printf("%s\n", USAGE);
 }
