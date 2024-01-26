@@ -1,13 +1,3 @@
-
-
-
-
-/* RENAME print_help_message 
-
-and ALL other snake_case variables !!!
-*/
-
-
 #include <stdio.h>
 
 const char *HELP_MESSAGE = "tangler: Corrupt files by overwriting bytes with controlled intensity.\n" 
