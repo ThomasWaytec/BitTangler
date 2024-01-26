@@ -86,14 +86,14 @@ void parseArgs(int argc, char* argv[],
 
             if (!isStringNumeric(arg))
             {
-                fatal_error("Intensity level \"%s\" may only contain numbers.", arg);
+                fatalError("Intensity level \"%s\" may only contain numbers.", arg);
             }
             
             unscaledIntensity = atoi(arg);
 
             if (unscaledIntensity < 1 || unscaledIntensity > 100)
             {
-                fatal_error("Intensity level \"%zu\" has to be between 1 and 100 (including).", unscaledIntensity);
+                fatalError("Intensity level \"%zu\" has to be between 1 and 100 (including).", unscaledIntensity);
             }
             
             intensityInput = false;
@@ -123,7 +123,7 @@ void parseArgs(int argc, char* argv[],
         /* non-switch (filepath) argument */
         else if (arg[0] != '-') {
             /* more than one filepath arguments given */
-            if (filepath != NULL) {fatal_error("Too many non-switch (filepath) arguments: \"%s\" ...", arg);}
+            if (filepath != NULL) {fatalError("Too many non-switch (filepath) arguments: \"%s\" ...", arg);}
 
             filepath = arg;
         }
@@ -134,7 +134,7 @@ void parseArgs(int argc, char* argv[],
 
     if (filepath == NULL) {
         print_usage();
-        fatal_error("No file argument given.");
+        fatalError("No file argument given.");
     }
 
     /* return values via pointers */
@@ -159,7 +159,7 @@ int main(int argc, char* argv[]) {
 
 
     if (!fileExists(filepath))
-    {fatal_error("File not found or doesn't exist: \"%s\"", filepath);}
+    {fatalError("File not found or doesn't exist: \"%s\"", filepath);}
     
     
     
