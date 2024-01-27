@@ -63,7 +63,7 @@ void parseArgs(int argc, char* argv[],
                char** pFilePath, size_t* pUnscaledIntensity) {
     /* parse command-line arguments */
 
-    char* filepath = NULL;
+    char* filePath = NULL;
     size_t unscaledIntensity = *pUnscaledIntensity;
     
     bool intensityInput;
@@ -120,26 +120,26 @@ void parseArgs(int argc, char* argv[],
         }
 
 
-        /* non-switch (filepath) argument */
+        /* non-switch (file path) argument */
         else if (arg[0] != '-') {
-            /* more than one filepath arguments given */
-            if (filepath != NULL) {fatalError("Too many non-switch (filepath) arguments: \"%s\" ...", arg);}
+            /* more than one file path arguments given */
+            if (filePath != NULL) {fatalError("Too many non-switch (file path) arguments: \"%s\" ...", arg);}
 
-            filepath = arg;
+            filePath = arg;
         }
 
         /* any other argument */
         else {unknownArgError(arg);}
     }
 
-    if (filepath == NULL) {
+    if (filePath == NULL) {
         printUsage();
         fatalError("No file argument given.");
     }
 
     /* return values via pointers */
     *pUnscaledIntensity = unscaledIntensity;
-    *pFilePath = strdup(filepath);
+    *pFilePath = strdup(filePath);
 
     
 }
@@ -147,23 +147,23 @@ void parseArgs(int argc, char* argv[],
 int main(int argc, char* argv[]) {
 
 
-    char* filepath = NULL;
+    char* filePath = NULL;
     size_t unscaledIntensity = DEFAULT_INTENSITY;
 
     parseArgs(argc, argv,
-              &filepath, &unscaledIntensity);
+              &filePath, &unscaledIntensity);
 
  
 
 
 
 
-    if (!fileExists(filepath))
-    {fatalError("File not found or doesn't exist: \"%s\"", filepath);}
+    if (!fileExists(filePath))
+    {fatalError("File not found or doesn't exist: \"%s\"", filePath);}
     
     
     
-    const size_t FILE_SIZE = getFileSize(filepath);
+    const size_t FILE_SIZE = getFileSize(filePath);
     size_t intensity = (size_t)scaleIntensity((double)unscaledIntensity);
 
     double bytesToCorrupt = (double)FILE_SIZE * ((double)intensity/100);
@@ -173,10 +173,10 @@ int main(int argc, char* argv[]) {
     size_t sequences = (size_t) (bytesToCorrupt / ((double)maxSeqLen/2));
 
 
-    corruptFile(filepath, sequences, maxSeqLen);
+    corruptFile(filePath, sequences, maxSeqLen);
 
     printf("%s corrupted successfully with intensity level of %zu.\n",
-    filepath, unscaledIntensity);
+    filePath, unscaledIntensity);
 
     return 0;
 }
