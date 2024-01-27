@@ -60,7 +60,7 @@ void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
 }
 
 void parseArgs(int argc, char* argv[],
-               char** pFilepath, size_t* pUnscaledIntensity) {
+               char** pFilePath, size_t* pUnscaledIntensity) {
     /* parse command-line arguments */
 
     char* filepath = NULL;
@@ -139,7 +139,7 @@ void parseArgs(int argc, char* argv[],
 
     /* return values via pointers */
     *pUnscaledIntensity = unscaledIntensity;
-    *pFilepath = strdup(filepath);
+    *pFilePath = strdup(filepath);
 
     
 }
