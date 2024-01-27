@@ -30,10 +30,10 @@ double scaleIntensity(double n) {
 }   
 
 
-void corruptFile(const char *FILEPATH, size_t sequences, size_t maxSeqLen) {
-    const size_t FILE_SIZE = getFileSize(FILEPATH);
+void corruptFile(const char *FILE_PATH, size_t sequences, size_t maxSeqLen) {
+    const size_t FILE_SIZE = getFileSize(FILE_PATH);
 
-    FILE *file = fopen(FILEPATH, "r+");
+    FILE *file = fopen(FILE_PATH, "r+");
     
     /* seed RNG */
     srand((unsigned int)time(NULL));
