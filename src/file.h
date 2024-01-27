@@ -1,8 +1,8 @@
 #ifndef FILE_H
 #define FILE_H
 
-const size_t getFileSize(const char *FILEPATH);
-bool fileExists(const char* FILEPATH);
+const size_t getFileSize(const char* FILE_PATH);
+bool fileExists(const char* FILE_PATH);
 
 
 
