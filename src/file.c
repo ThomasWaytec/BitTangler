@@ -26,12 +26,12 @@ const size_t getFileSize(const char* FILEPATH) {
 
     /* get file size */
     fseek(file, 0, SEEK_END);
-    const size_t FILESIZE = ftell(file);
+    const size_t FILE_SIZE = ftell(file);
     fseek(file, 0, SEEK_END);
 
 
     fclose(file);
 
-    return FILESIZE;
+    return FILE_SIZE;
 
 }
