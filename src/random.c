@@ -1,5 +1,5 @@
 #include <stdlib.h>
-
+#include <time.h>
 
 void seedRand(void) {
 
