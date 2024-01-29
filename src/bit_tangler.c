@@ -11,6 +11,7 @@
 #include "help.h"
 #include "file.h"
 #include "string_utils.h"
+#include "random.h"
 
 #define DEFAULT_INTENSITY 10
 
@@ -34,23 +35,19 @@ void corruptFile(const char *FILE_PATH, size_t sequences, size_t maxSeqLen) {
     const size_t FILE_SIZE = getFileSize(FILE_PATH);
 
     FILE *file = fopen(FILE_PATH, "r+");
-    
-    /* seed RNG */
-    srand((unsigned int)time(NULL));
 
 
     for (size_t i = 0; i < sequences; i++)
     {
 
-        size_t position = rand() % FILE_SIZE;
-        size_t seqLen = rand() % maxSeqLen + 1;
-
+        size_t position = (size_t) randNum(0, FILE_SIZE);
+        size_t seqLen = (size_t) randNum(1, maxSeqLen);
 
         fseek(file, position, SEEK_SET);
 
         /* write a byte sequence of length seqLen */
         for (size_t i = 0; i < seqLen; i++) {
-            char randomByte = rand() % CHAR_MAX;
+            char randomByte = (char) randNum(0, CHAR_MAX);
             fwrite(&randomByte, sizeof(char), 1, file);
         }
     }
