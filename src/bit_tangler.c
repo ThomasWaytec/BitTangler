@@ -169,6 +169,8 @@ int main(int argc, char* argv[]) {
     size_t maxSeqLen = (size_t) ceil((bytesToCorrupt * 0.003));
     size_t sequences = (size_t) (bytesToCorrupt / ((double)maxSeqLen/2));
 
+    /* seed the RNG */
+    seedRand();
 
     corruptFile(filePath, sequences, maxSeqLen);
 
