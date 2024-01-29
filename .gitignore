@@ -17,6 +17,6 @@ tangler
 *.vscode/
 tempCodeRunnerFile.c
 
-# Testing
+# For Testing
 create_test_file.py
-test.txt
+*.txt
