@@ -2,7 +2,7 @@
 
 
 
-long long int largeRand(long long int lower, long long int upper) {
+long long int randNum(long long int lower, long long int upper) {
 
     long long int range = upper + 1 - lower;
     
