@@ -1,6 +1,12 @@
 #include <stdlib.h>
 
 
+void seedRand(void) {
+
+    /* seed the RNG with the current time */
+    srand((unsigned int)time(NULL));
+
+}
 
 long long int randNum(long long int lower, long long int upper) {
 
